@@ -27,3 +27,11 @@ pre-commit:
     - run: bun run fmt {staged_files}
       glob: "*.{js,ts,jsx,tsx}"
       stage_fixed: true
+
+pre-push:
+  parallel: true
+  jobs:
+    - name: lint
+      run: bun run lint
+    - name: test
+      run: bun run test
