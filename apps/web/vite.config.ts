@@ -1,3 +1,4 @@
+/// <reference types="vitest/config" />
 import { defineConfig, loadEnv } from "vite";
 import { devtools } from "@tanstack/devtools-vite";
 
@@ -13,6 +14,10 @@ export default ({ mode }: { mode: string }) => {
   const config = defineConfig({
     resolve: {
       tsconfigPaths: true,
+    },
+    test: {
+      // Capped so test runs don't exhaust the shared dev box's memory (default: one worker per core).
+      maxWorkers: 4,
     },
     plugins: [
       devtools(),
